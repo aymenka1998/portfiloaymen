@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="htmlElement">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أيمن كعور | مطور ويب محترف</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* الأساسيات */
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --text-light: #7f8c8d;
+            --bg-color: #f9f9f9;
+            --nav-bg: white;
+            --card-bg: white;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        /* الوضع المظلم */
+        [data-theme="dark"] {
+            --primary-color: #3a86ff;
+            --secondary-color: #8338ec;
+            --text-color: #f8f9fa;
+            --light-color: #343a40;
+            --bg-color: #212529;
+            --nav-bg: #343a40;
+            --card-bg: #495057;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--bg-color);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px var(--shadow-color);
+        }
+
+        /* شريط التنقل */
+        nav {
+            background-color: var(--nav-bg);
+            box-shadow: 0 2px 10px var(--shadow-color);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 20px 0;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-right: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* القسم الرئيسي */
+        .hero {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 150px 0 100px;
+            margin-top: 70px;
+        }
+
+        .hero .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .hero-content {
+            flex: 1;
+            padding-right: 50px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+
+        .hero-content h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: var(--text-light);
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px var(--shadow-color);
+        }
+
+        /* قسم عني */
+        .about .container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .social-links {
+            margin-top: 30px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            margin-right: 15px;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            transition: transform 0.3s;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px);
+        }
+
+        .about-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px var(--shadow-color);
+        }
+
+        /* قسم المهارات */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-item {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px var(--shadow-color);
+        }
+
+        .skill-item i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .skill-item h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        /* قسم الإنجازات */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px var(--shadow-color);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .project-info {
+            padding: 20px;
+        }
+
+        .project-info h3 {
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        .project-info p {
+            margin-bottom: 20px;
+            color: var(--text-light);
+        }
+
+        /* قسم اتصل بي */
+        .contact-content {
+            display: flex;
+            gap: 50px;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-info h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+
+        .contact-info p {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .info-item i {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-right: 15px;
+        }
+
+        .contact-form {
+            flex: 1;
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px var(--shadow-color);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1rem;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        /* تذييل الصفحة */
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        footer p {
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            display: inline-block;
+            margin: 0 10px;
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* أزرار التحكم */
+        .theme-controls {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .theme-btn, .lang-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 10px var(--shadow-color);
+        }
+
+        /* تصميم متجاوب */
+        @media (max-width: 992px) {
+            .hero .container,
+            .about-content,
+            .contact-content {
+                flex-direction: column;
+            }
+            
+            .hero-content,
+            .about-text,
+            .contact-info {
+                padding-right: 0;
+                margin-bottom: 50px;
+            }
+            
+            .hero-image,
+            .about-image {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--nav-bg);
+                padding: 20px;
+                box-shadow: 0 5px 10px var(--shadow-color);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 10px 0;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content h2 {
+                font-size: 1.5rem;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- أزرار التحكم -->
+    <div class="theme-controls">
+        <button class="theme-btn" id="themeToggle">
+            <i class="fas fa-moon"></i>
+        </button>
+        <button class="lang-btn" id="langToggle">
+            EN
+        </button>
+    </div>
+
+    <!-- شريط التنقل -->
+    <nav>
+        <div class="container">
+            <a href="#" class="logo">أيمن كعور</a>
+            <ul class="nav-links">
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#about">عنّي</a></li>
+                <li><a href="#skills">المهارات</a></li>
+                <li><a href="#projects">الإنجازات</a></li>
+                <li><a href="#contact">اتصل بي</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- القسم الرئيسي -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>أيمن كعور</h1>
+                <h2>مطور ويب محترف</h2>
+                <p>أحول الأفكار إلى حلول رقمية مبتكرة</p>
+                <a href="#projects" class="btn">أعمالي</a>
+            </div>
+            <div class="hero-image">
+                <img src="pngtree-programmer-it-developer-png-image_13520483.png" alt="صورة أيمن كعور">
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم عني -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">عنّي</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>مرحبًا، أنا أيمن كعور</h3>
+                    <p>أنا مطور ويب متخصص في إنشاء تطبيقات ويب حديثة وسريعة الاستجابة. لدي خبرة في تطوير واجهات المستخدم وتجربة المستخدم باستخدام أحدث التقنيات مثل JavaScript وReact.</p>
+                    <p>أؤمن بقوة التكنولوجيا في تحسين حياتنا وأسعى دائمًا لإنشاء حلول رقمية تسهل حياة الناس وتلبي احتياجاتهم.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="images.jpeg" alt="صورة عن أيمن كعور">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم المهارات -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">المهارات</h2>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <i class="fab fa-js"></i>
+                    <h3>JavaScript</h3>
+                    <p>إتقان متقدم لجافاسكريبت وتطوير تطبيقات ويب تفاعلية</p>
+                </div>
+                <div class="skill-item">
+                    <i class="fab fa-html5"></i>
+                    <h3>HTML5</h3>
+                    <p>هيكلة محتوى الويب باستخدام أحدث معايير HTML5</p>
+                </div>
+                <div class="skill-item">
+                    <i class="fab fa-css3-alt"></i>
+                    <h3>CSS3 & SASS</h3>
+                    <p>تصميم واجهات مستخدم جذابة باستخدام CSS3 ومُعالج SASS</p>
+                </div>
+                <div class="skill-item">
+                    <i class="fab fa-react"></i>
+                    <h3>React.js</h3>
+                    <p>بناء تطبيقات ويب معقدة باستخدام مكتبة React</p>
+                </div>
+                <div class="skill-item">
+                    <i class="fas fa-database"></i>
+                    <h3>قواعد البيانات</h3>
+                    <p>تصميم وإدارة قواعد البيانات العلائقية</p>
+                </div>
+                <div class="skill-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>تصميم متجاوب</h3>
+                    <p>تطوير واجهات تعمل على جميع أحجام الشاشات</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الإنجازات -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">الإنجازات</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/600x400" alt="موقع إيكومرس">
+                    <div class="project-info">
+                        <h3>موقع إيكومرس</h3>
+                        <p>منصة بيع إلكتروني متكاملة مع نظام دفع وإدارة مخزون</p>
+                        <a href="#" class="btn">عرض المشروع</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/600x400" alt="منصة تعليمية">
+                    <div class="project-info">
+                        <h3>منصة تعليمية</h3>
+                        <p>نظام إدارة تعلم إلكتروني مع فصول افتراضية وتقييم الطلاب</p>
+                        <a href="#" class="btn">عرض المشروع</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/600x400" alt="وسيط صيدليات">
+                    <div class="project-info">
+                        <h3>وسيط بين المورد والصيدلي</h3>
+                        <p>منصة تتيح للصيادلة طلب الأدوية مباشرة من الموردين</p>
+                        <a href="#" class="btn">عرض المشروع</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم اتصل بي -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">اتصل بي</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>ابقى على تواصل</h3>
+                    <p>إذا كنت مهتمًا بالعمل معي أو لديك أي استفسار، لا تتردد في مراسلتي.</p>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>aymenkaour6@gmail.com</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+213696741267</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>قالمة , الجزائر</span>
+                    </div>
+                </div>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <input type="text" placeholder="اسمك" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="بريدك الإلكتروني" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="الموضوع">
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="رسالتك" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">إرسال الرسالة</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- تذييل الصفحة -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 أيمن كعور. جميع الحقوق محفوظة.</p>
+            <div class="footer-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // تنشيط القائمة المتنقلة على الأجهزة الصغيرة
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuToggle.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+        });
+        
+        // إغلاق القائمة عند النقر على رابط
+        const navItems = document.querySelectorAll('.nav-links a');
+        navItems.forEach(item => {
+            item.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+        
+        // تأثير التمرير السلس
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 70,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // تأثير التمرير لإظهار العناصر
+        const animateOnScroll = function() {
+            const elements = document.querySelectorAll('.skill-item, .project-card, .about-content, .contact-content');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementPosition < windowHeight - 100) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+        
+        // تعيين الخصائص الأولية للعناصر
+        document.querySelectorAll('.skill-item, .project-card').forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        });
+        
+        document.querySelector('.about-content').style.opacity = '0';
+        document.querySelector('.about-content').style.transform = 'translateX(-50px)';
+        document.querySelector('.about-content').style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        
+        document.querySelector('.contact-content').style.opacity = '0';
+        document.querySelector('.contact-content').style.transform = 'translateX(50px)';
+        document.querySelector('.contact-content').style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        
+        // تشغيل تأثير التمرير عند التحميل وعند التمرير
+        window.addEventListener('load', animateOnScroll);
+        window.addEventListener('scroll', animateOnScroll);
+        
+        // تغيير لون شريط التنقل عند التمرير
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.padding = '15px 0';
+                nav.style.boxShadow = '0 2px 10px var(--shadow-color)';
+            } else {
+                nav.style.padding = '20px 0';
+                nav.style.boxShadow = '0 2px 10px var(--shadow-color)';
+            }
+        });
+
+        // تبديل الوضع المظلم
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.getElementById('htmlElement');
+        
+        // التحقق من التفضيل المحفوظ
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        if (currentTheme === 'dark') {
+            htmlElement.setAttribute('data-theme', 'dark');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.getAttribute('data-theme') === 'dark') {
+                htmlElement.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            } else {
+                htmlElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+        });
+
+        // تبديل اللغة
+        document.getElementById('langToggle').addEventListener('click', () => {
+            window.location.href = 'df.html'; // ملف النسخة الإنجليزية
+        });
+    </script>
+</body>
+</html>
